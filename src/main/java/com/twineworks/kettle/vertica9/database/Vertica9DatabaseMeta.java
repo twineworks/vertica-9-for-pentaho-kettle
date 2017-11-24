@@ -34,7 +34,7 @@ import org.pentaho.di.core.row.ValueMetaInterface;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-@DatabaseMetaPlugin(type = "Vertica9+", typeDescription = "Vertica 9")
+@DatabaseMetaPlugin(type = "VERTICA9", typeDescription = "Vertica 9+")
 public class Vertica9DatabaseMeta extends BaseDatabaseMeta implements DatabaseInterface {
 
   @Override
