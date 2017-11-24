@@ -1,0 +1,1 @@
+### Vertica 9 database compatibility plugin for pentaho-kettle  
