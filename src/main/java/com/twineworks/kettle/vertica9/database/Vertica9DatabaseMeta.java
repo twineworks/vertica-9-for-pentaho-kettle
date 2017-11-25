@@ -28,10 +28,13 @@ import org.pentaho.di.core.database.Database;
 import org.pentaho.di.core.database.DatabaseInterface;
 import org.pentaho.di.core.database.DatabaseMeta;
 import org.pentaho.di.core.exception.KettleDatabaseException;
+import org.pentaho.di.core.exception.KettlePluginException;
 import org.pentaho.di.core.plugins.DatabaseMetaPlugin;
 import org.pentaho.di.core.row.ValueMetaInterface;
+import org.pentaho.di.core.row.value.ValueMetaFactory;
 
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 @DatabaseMetaPlugin(type = "VERTICA9", typeDescription = "Vertica 9+")
@@ -809,6 +812,26 @@ public class Vertica9DatabaseMeta extends BaseDatabaseMeta implements DatabaseIn
     return " NO MAXVALUE";
   }
 
+  @Override
+  public ValueMetaInterface customizeValueFromSQLType(ValueMetaInterface v, ResultSetMetaData rm, int index) throws SQLException {
+
+    // do not support lazy conversion
+    // if lazy conversion is specified, disable it
+    if (v.getType() == ValueMetaInterface.TYPE_STRING &&
+      v.getStorageType() == ValueMetaInterface.STORAGE_TYPE_BINARY_STRING){
+      try {
+        ValueMetaInterface c = ValueMetaFactory.cloneValueMeta(v, ValueMetaInterface.TYPE_STRING);
+        c.setStorageType(ValueMetaInterface.STORAGE_TYPE_NORMAL);
+        return c;
+      } catch (KettlePluginException e) {
+        throw new RuntimeException(e.getMessage(), e);
+      }
+    }
+
+    return super.customizeValueFromSQLType(v, rm, index);
+  }
+
+  @Override
   public boolean supportsBooleanDataType() {
     return true;
   }
