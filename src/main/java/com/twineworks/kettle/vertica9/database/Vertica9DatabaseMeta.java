@@ -780,7 +780,7 @@ public class Vertica9DatabaseMeta extends BaseDatabaseMeta implements DatabaseIn
 
   @Override
   public String[] getViewTypes() {
-    return new String[]{};
+    return new String[]{"VIEW"};
   }
 
   @Override
