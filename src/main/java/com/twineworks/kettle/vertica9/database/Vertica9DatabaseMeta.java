@@ -893,33 +893,38 @@ public class Vertica9DatabaseMeta extends BaseDatabaseMeta implements DatabaseIn
 
   @Override
   public Object getValueFromResultSet(ResultSet rs, ValueMetaInterface val, int index) throws KettleDatabaseException {
-    Object data;
 
     try {
-      switch (val.getType()) {
-        case ValueMetaInterface.TYPE_TIMESTAMP:
-        case ValueMetaInterface.TYPE_DATE:
-          if (val.getOriginalColumnType() == java.sql.Types.TIMESTAMP) {
-            data = rs.getTimestamp(index + 1);
-            break;
-          } else if (val.getOriginalColumnType() == java.sql.Types.TIME) {
-            data = rs.getTime(index + 1);
-            break;
-          } else {
-            data = rs.getDate(index + 1);
-            break;
-          }
-        default:
-          return super.getValueFromResultSet(rs, val, index);
+
+      Object data;
+
+      final int fieldType = val.getType();
+      final int sqlType = val.getOriginalColumnType();
+
+      // special cases for timestamps / dates / times
+      if (fieldType == ValueMetaInterface.TYPE_TIMESTAMP || fieldType == ValueMetaInterface.TYPE_DATE){
+
+        if (sqlType == java.sql.Types.TIMESTAMP) {
+          data = rs.getTimestamp(index + 1);
+        } else if (sqlType == java.sql.Types.TIME) {
+          data = rs.getTime(index + 1);
+        } else {
+          data = rs.getDate(index + 1);
+        }
+
+        if (rs.wasNull()) {
+          data = null;
+        }
+        return data;
       }
-      if (rs.wasNull()) {
-        data = null;
+      else{
+        return super.getValueFromResultSet(rs, val, index);
       }
+
     } catch (SQLException e) {
       throw new KettleDatabaseException("Unable to get value '"
           + val.toStringMeta() + "' from database resultset, index " + index, e);
     }
 
-    return data;
   }
 }
