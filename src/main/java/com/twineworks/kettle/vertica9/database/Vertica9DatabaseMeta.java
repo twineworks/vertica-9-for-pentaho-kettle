@@ -793,8 +793,12 @@ public class Vertica9DatabaseMeta extends BaseDatabaseMeta implements DatabaseIn
     return false;
   }
 
+  @Override
   public boolean checkIndexExists(Database database, String schemaName, String tableName, String[] idx_fields ) throws KettleDatabaseException {
-    // no explicit index handling, indexes are not exposed. Assume all indexes are there!
+    // Vertica has no explicit index handling. Assume all indexes are there!
+    return true;
+  }
+
   @Override
   public boolean supportsSequenceNoMaxValueOption() {
     return true;
