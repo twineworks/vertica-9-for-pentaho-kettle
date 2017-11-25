@@ -14,13 +14,13 @@
     </organization>
 
     <name>${project.groupId}:${project.artifactId}</name>
-    <description>Scripting steps for Pentaho kettle.</description>
-    <url>https://github.com/twineworks/ruby-for-pentaho-kettle</url>
+    <description>Vertica 9+ support for pentaho kettle</description>
+    <url>https://github.com/twineworks/vertica-9-for-pentaho-kettle</url>
 
     <licenses>
         <license>
-            <name>LGPL 2.1 License</name>
-            <url>https://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html</url>
+            <name>Apache 2.0 License</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
         </license>
     </licenses>
 
