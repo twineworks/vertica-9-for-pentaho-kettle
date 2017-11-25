@@ -8,7 +8,7 @@
 An plugin for Pentaho kettle (PDI) providing support for modern versions of Vertica. Tested with Vertica 9. 
 
 ## Supported versions of pentaho-kettle
-The plugin is built and against the most recent versions of Kettle 6.x, 7.x and 8.x.
+The plugin is built against the most recent versions of Kettle 6.x, 7.x and 8.x.
 
 ## How to get it?
 Grab the latest release from the [releases](https://github.com/twineworks/vertica-9-for-pentaho-kettle/releases) page.
@@ -19,7 +19,7 @@ Decompress the release zip to `<kettle-dir>/plugins` and restart Spoon. The "Ver
 The plugin is tested with the official vertica 9 jdbc drivers. 
 
 ## Why would I want this?
-Official Vertica support in kettle has not been updated for a while. Among other things, this plugin fixes the following issues:
+Official Vertica support in kettle has not been updated in a while. Among other things, this plugin fixes the following issues:
 - [PDI-7769 - Vertica: Database Explorer shows views in the schema tree instead of the view tree](http://jira.pentaho.com/browse/PDI-7769)
 - [PDI-10234 - Vertica database logging does not log time information](http://jira.pentaho.com/browse/PDI-10234) (In fact, the issue is more severe: time is **always** truncated in DATETIME inserts.)
 - [PDI-13018 - lazy conversion for vertica table input does not work](http://jira.pentaho.com/browse/PDI-13018)
