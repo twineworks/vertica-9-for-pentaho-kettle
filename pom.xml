@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.twineworks</groupId>
-    <artifactId>vertica9-for-pentaho-kettle</artifactId>
+    <artifactId>vertica-9-for-pentaho-kettle</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <organization>
@@ -34,9 +34,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:git://github.com:twineworks/vertica9-for-pentaho-kettle.git</connection>
-        <developerConnection>scm:git:ssh://github.com:twineworks/vertica9-for-pentaho-kettle.git</developerConnection>
-        <url>https://github.com/twineworks/vertica9-for-pentaho-kettle/tree/master</url>
+        <connection>scm:git:git://github.com:twineworks/vertica-9-for-pentaho-kettle.git</connection>
+        <developerConnection>scm:git:ssh://github.com:twineworks/vertica-9-for-pentaho-kettle.git</developerConnection>
+        <url>https://github.com/twineworks/vertica-9-for-pentaho-kettle/tree/master</url>
     </scm>
 
     <properties>
@@ -46,6 +46,7 @@
         <!--<pentaho.kettle.version>5.4.1.8-209</pentaho.kettle.version>-->
         <pentaho.kettle.version>6.1.0.9-307</pentaho.kettle.version>
         <!--<pentaho.kettle.version>7.1.0.4-63</pentaho.kettle.version>-->
+        <!--<pentaho.kettle.version>8.0.0.0-28</pentaho.kettle.version>-->
         <skipTests>true</skipTests>
     </properties>
 
