@@ -40,6 +40,14 @@ import java.sql.SQLException;
 @DatabaseMetaPlugin(type = "VERTICA9", typeDescription = "Vertica 9+")
 public class Vertica9DatabaseMeta extends BaseDatabaseMeta implements DatabaseInterface {
 
+  /*
+  *
+  * https://www.vertica.com/docs/9.2.x/HTML/Content/Authoring/SQLReferenceManual/DataTypes/LongDataTypes.htm
+  *
+  * */
+  final int LONG = 65000;
+
+
   @Override
   public int[] getAccessTypeList() {
     return new int[]{
@@ -123,13 +131,25 @@ public class Vertica9DatabaseMeta extends BaseDatabaseMeta implements DatabaseIn
         break;
       case ValueMetaInterface.TYPE_INTEGER:
         retval += "INTEGER";
-        break;
       case ValueMetaInterface.TYPE_STRING:
-        retval += (length < 1) ? "VARCHAR" : "VARCHAR(" + length + ")";
+        if (length < 1) {
+          retval += "VARCHAR";
+        } else if(length > LONG) {
+          retval += "LONG VARCHAR(" + length + ")";
+        } else {
+          retval += "VARCHAR(" + length + ")";
+        }
         break;
       case ValueMetaInterface.TYPE_BINARY:
-        retval += (length < 1) ? "VARBINARY" : "VARBINARY(" + length + ")";
+        if (length < 1) {
+          retval += "VARBINARY";
+        } else if(length > LONG) {
+          retval += "LONG VARBINARY(" + length + ")";
+        } else {
+          retval += "VARBINARY(" + length + ")";
+        }
         break;
+  break;
       default:
         retval += " UNKNOWN";
         break;
